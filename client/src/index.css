@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+  body {
+    background-color: #0e0d0c;
+    color: #f0ebe0;
+    font-family: "Archivo Variable", "Archivo", system-ui, sans-serif;
+    font-variation-settings: "wdth" 100;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+  ::selection { background: #d4ff2a; color: #0e0d0c; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: #0e0d0c; }
+  ::-webkit-scrollbar-thumb { background: #2e2c28; border: 2px solid #0e0d0c; }
+  ::-webkit-scrollbar-thumb:hover { background: #d4ff2a; }
+
+  :focus-visible { outline: 2px solid #d4ff2a; outline-offset: 3px; }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f0ebe0;
+    -webkit-box-shadow: 0 0 0 1000px #1a1917 inset;
+    caret-color: #f0ebe0;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  input[type="number"] { -moz-appearance: textfield; }
+}
+
+@layer components {
+  /* Poster-style display type */
+  .display { font-family: "Anton", Impact, sans-serif; font-weight: 400; letter-spacing: 0.005em; line-height: 0.9; text-transform: uppercase; }
+  .wide { font-variation-settings: "wdth" 125; }
+  .narrow { font-variation-settings: "wdth" 75; }
+
+  .page { @apply min-h-screen pt-24 pb-20 px-4 sm:px-6 lg:px-10; }
+  .shell { @apply max-w-[1400px] mx-auto; }
+
+  .panel { @apply bg-slab border border-line; }
+
+  /* Sticker buttons: hard offset shadow that presses in on click */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-3 font-bold text-sm select-none
+      border-2 transition-[transform,box-shadow,background-color,color] duration-150
+      disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none;
+    font-variation-settings: "wdth" 110;
+  }
+  .btn-acid { @apply btn bg-acid text-ink border-ink shadow-sticker-bone hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#f0ebe0] active:translate-x-1 active:translate-y-1 active:shadow-none; }
+  .btn-bone { @apply btn bg-bone text-ink border-ink shadow-sticker-acid hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[6px_6px_0_0_#d4ff2a] active:translate-x-1 active:translate-y-1 active:shadow-none; }
+  .btn-line { @apply btn bg-transparent text-bone border-line hover:border-bone active:translate-y-px; }
+  .btn-danger { @apply btn bg-transparent text-signal border-signal/50 hover:bg-signal hover:text-ink hover:border-signal; }
+
+  .field {
+    @apply w-full bg-ink border-2 border-line px-4 py-3 text-bone text-[15px] placeholder:text-smoke/60
+      focus:outline-none focus:border-acid transition-colors;
+  }
+  .field-label { @apply block text-[13px] font-semibold text-smoke mb-1.5; }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-semibold border-2 border-line text-smoke
+      hover:text-bone hover:border-bone transition-colors whitespace-nowrap;
+  }
+  .chip-on { @apply bg-acid text-ink border-acid hover:text-ink hover:border-acid; }
+
+  .tag { @apply inline-block px-2 py-0.5 text-[12px] font-semibold bg-bone text-ink; }
+
+  .link-u { @apply underline decoration-2 underline-offset-4 decoration-acid hover:text-acid; }
+}
+
+/* Paper grain over the whole site */
+.grain {
+  pointer-events: none;
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Masking-tape strip on top of a pasted poster */
+.tape::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 72px;
+  height: 22px;
+  transform: translateX(-50%) rotate(-3deg);
+  background: rgba(240, 235, 224, 0.78);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  clip-path: polygon(3% 0, 97% 4%, 100% 50%, 96% 100%, 4% 96%, 0 50%);
+  z-index: 3;
+}
+
+/* Halftone dot field used in generated artwork */
+.halftone {
+  background-image: radial-gradient(currentColor 1.2px, transparent 1.4px);
+  background-size: 9px 9px;
+}
+
+.text-outline { -webkit-text-stroke: 2px #f0ebe0; color: transparent; }
+.text-outline-acid { -webkit-text-stroke: 2px #d4ff2a; color: transparent; }
+
+.skeleton {
+  background: linear-gradient(90deg, #1a1917 0%, #2e2c28 50%, #1a1917 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
