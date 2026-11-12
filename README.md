@@ -117,7 +117,7 @@ npm run dev
 Open **http://localhost:5173**
 
 ### First-time setup
-1. Go to **Log in → Use demo admin**, then log in (`admin@pixelstore.com` / `admin123`)
+1. Go to **Log in → Use demo admin**, then log in (`admin@pixelstore.com` / `admin123`). This demo account only exists when `ALLOW_DEMO_SEED=true` is in `server/.env` (the example file sets it for local use); leave it out when you deploy.
 2. On the home page or **Admin → Dashboard**, click **Load sample catalogue**
 
 ---
@@ -128,7 +128,7 @@ Open **http://localhost:5173**
 |---|---|---|---|
 | POST | /api/auth/register | Public | Register |
 | POST | /api/auth/login | Public | Log in |
-| POST | /api/auth/seed-admin | Public | Create demo admin |
+| POST | /api/auth/seed-admin | Local demo only | Create demo admin (needs `ALLOW_DEMO_SEED=true`) |
 | GET / PUT | /api/auth/profile | User | Get / update profile |
 | GET | /api/products | Public | List (search, category, platform, tag, price, sort, page) |
 | GET | /api/products/categories | Public | Product count per category |

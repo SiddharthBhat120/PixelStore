@@ -68,7 +68,12 @@ const updateProfile = async (req, res) => {
 };
 
 // POST /api/auth/seed-admin
+// Demo helper: creates a known admin account. It only works when
+// ALLOW_DEMO_SEED=true is set, so a deployed server never exposes it by accident.
 const seedAdmin = async (req, res) => {
+  if (process.env.ALLOW_DEMO_SEED !== "true") {
+    return res.status(403).json({ success: false, message: "Demo admin is turned off on this server. Set ALLOW_DEMO_SEED=true in server/.env to use it locally." });
+  }
   try {
     const exists = await User.findOne({ email: "admin@pixelstore.com" });
     if (exists) return res.json({ success: true, message: "Admin exists.", credentials: { email: "admin@pixelstore.com", password: "admin123" } });

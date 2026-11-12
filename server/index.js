@@ -36,7 +36,9 @@ const startServer = async () => {
   app.listen(PORT, () => {
     console.log(`\nPixelStore Server running on port ${PORT}`);
     console.log(`Health: http://localhost:${PORT}/api/health`);
-    console.log(`Seed admin: POST http://localhost:${PORT}/api/auth/seed-admin`);
+    if (process.env.ALLOW_DEMO_SEED === "true") {
+      console.log(`Seed admin: POST http://localhost:${PORT}/api/auth/seed-admin`);
+    }
     console.log(`Seed products: POST http://localhost:${PORT}/api/products/seed\n`);
   });
 };
