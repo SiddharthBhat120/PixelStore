@@ -63,7 +63,7 @@ const Footer = () => (
         <p>© {new Date().getFullYear()} PixelStore. Game artwork belongs to its publishers.</p>
         <p>
           Designed and built by{" "}
-          <a href="https://github.com/SiddharthBhat120" target="_blank" rel="noreferrer" className="link-u text-bone">Siddharth Bhat</a>
+          <a href="https://github.com/sidxcodes" target="_blank" rel="noreferrer" className="link-u text-bone">Siddharth Bhat</a>
         </p>
       </div>
     </div>
